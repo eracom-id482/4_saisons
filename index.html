@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4 saisons</title>
+  </head>
+  <body>
+    <h1 id="month">Mois actuel</h1>
+
+    <main id="calendrier"></main>
+
+    <script>
+      var now = new Date(); // la date actuelle.
+      var monthNr = now.getMonth(); // chiffre de 0 (janvier) à 12 (décembre)
+
+      const monthNames = [
+        "janvier",
+        "février",
+        "mars",
+        "avril",
+        "mai",
+        "juin",
+        "juillet",
+        "août",
+        "septembre",
+        "octobre",
+        "novembre",
+        "décembre",
+      ];
+
+      // Produire le nom du mois actuel
+      document.getElementById("month").innerHTML =
+        "Mois actuel: " + monthNames[monthNr];
+
+      // Méthode très tordue pour obtenir le nombre de jours dans le mois actuel
+      // source: https://stackoverflow.com/questions/38446725/
+      function daysInMonth(month, year) {
+        return new Date(year, month, 0).getDate();
+      }
+      var nombreJours = daysInMonth(monthNr + 1, now.getFullYear());
+
+      // Produire des chiffres de 1 à 31
+      var i;
+      for (i = 1; i < nombreJours + 1; i++) {
+        var jour = document.createElement("div");
+        jour.className = "jour";
+        jour.id = "jour" + i;
+        document.getElementById("calendrier").appendChild(jour).innerHTML = i;
+      }
+    </script>
+  </body>
+</html>
