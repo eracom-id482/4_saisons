@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4 saisons</title>
+    <style>
+      #calendrier {
+        display: grid;
+        grid-template-columns: repeat(7, auto);
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+      }
+
+      #calendrier div {
+        text-align: center;
+      }
+      #calendrier .jour {
+        border: 1px solid gray;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="month">Mois actuel</h1>
+
+    <main id="calendrier">
+      <div>LU</div>
+      <div>MA</div>
+      <div>ME</div>
+      <div>JE</div>
+      <div>VE</div>
+      <div>SA</div>
+      <div>DI</div>
+    </main>
+
+    <script>
+      var now = new Date(); // la date actuelle.
+      var monthNr = now.getMonth(); // chiffre de 0 (janvier) à 12 (décembre)
+
+      const monthNames = [
+        "janvier",
+        "février",
+        "mars",
+        "avril",
+        "mai",
+        "juin",
+        "juillet",
+        "août",
+        "septembre",
+        "octobre",
+        "novembre",
+        "décembre",
+      ];
+
+      // Produire le nom du mois actuel
+      document.getElementById("month").innerHTML =
+        "Mois actuel: " + monthNames[monthNr];
+
+      // Méthode pour obtenir le nombre de jours dans le mois actuel.
+      // On obtient le mois suivant, et on va au jour précédent en demandant le jour "0".
+      // source: https://stackoverflow.com/questions/38446725/
+      function daysInMonth(month, year) {
+        return new Date(year, month, 0).getDate();
+      }
+      var nombreJours = daysInMonth(monthNr + 1, now.getFullYear());
+
+      // Produire les chiffres des jours du mois
+      var i;
+      for (i = 1; i < nombreJours + 1; i++) {
+        var jour = document.createElement("div");
+        jour.className = "jour";
+        jour.id = "jour" + i;
+        document.getElementById("calendrier").appendChild(jour).innerHTML = i;
+      }
+    </script>
+  </body>
+</html>
